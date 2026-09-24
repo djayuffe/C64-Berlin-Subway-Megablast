@@ -1,0 +1,282 @@
+--- /mnt/data/audit24_orig/mega/src/subway.s	2026-07-04 20:31:36.000000000 +0000
++++ /mnt/data/audit24/mega/src/subway.s	2026-07-04 20:53:37.003684518 +0000
+@@ -195,22 +195,43 @@
+         rts
+ 
+ ClearScreenColor:
++        ; Clear exactly the 1000-byte text matrix and colour matrix.
++        ; Do not touch $07f8-$07ff sprite pointers in the screen page.
+         ldx #0
+         lda #$20
+ @s:     sta SCREEN+$000,x
+         sta SCREEN+$100,x
+         sta SCREEN+$200,x
+-        sta SCREEN+$300,x
+         inx
+         bne @s
+         ldx #0
++@s3:    sta SCREEN+$300,x
++        inx
++        cpx #$e8
++        bne @s3
++        ldx #0
+         lda #$00
+ @c:     sta COLOR+$000,x
+         sta COLOR+$100,x
+         sta COLOR+$200,x
+-        sta COLOR+$300,x
+         inx
+         bne @c
++        ldx #0
++@c3:    sta COLOR+$300,x
++        inx
++        cpx #$e8
++        bne @c3
++        ; Global safety: transitions/clears must not inherit sprite or VIC mode
++        ; state from exotic effects. Sprite effects re-enable their own state.
++        lda #$00
++        sta $d015
++        sta $d017
++        sta $d01d
++        sta $d01b
++        lda #$08
++        sta VIC_CTRL2
++        lda #$1b
++        sta VIC_CTRL1
+         rts
+ 
+ ; ============================================================================
+@@ -3471,13 +3492,13 @@
+         ldx TV_MusRow
+         clc
+ pFilt:  adc MUS_FILT,x          ; operand patched by SelectStyle
++        bcs MusFiltClamp        ; clamp first add too; never wrap into mud/silence
+         clc
+-        adc musicPulse          ; v2.3 beat bite opens the filter on hits
+-        bcc MusFiltNoWrap
+-        lda #$f0                ; never wrap into mud/silence
+-MusFiltNoWrap:
++        adc musicPulse          ; v2.4 beat bite opens the filter on hits
++        bcs MusFiltClamp
+         cmp #$f1
+         bcc MusFiltStore
++MusFiltClamp:
+         lda #$f0
+ MusFiltStore:
+         sta SID_FCHI
+@@ -3613,18 +3634,13 @@
+         jmp .flash
+ .kickclap:
+         lda #$00 : sta SID_V3FLO
+-        lda #$16 : sta SID_V3FHI
+-        lda #$07 : sta SID_V3AD
++        lda #$18 : sta SID_V3FHI
++        lda #$05 : sta SID_V3AD
+         lda #$00 : sta SID_V3SR
+         lda #$10 : sta SID_V3CTL
+         lda #$11 : sta SID_V3CTL
+-        lda #14  : sta TV_KickEnv
+-        lda #$00 : sta SID_V3FLO
+-        lda #$34 : sta SID_V3FHI
+-        lda #$08 : sta SID_V3AD
+-        lda #$00 : sta SID_V3SR
+-        lda #$80 : sta SID_V3CTL
+-        lda #$81 : sta SID_V3CTL
++        lda #18  : sta TV_KickEnv
++        lda #6   : jsr SndAdd          ; visual clap/stomp energy without killing the kick transient
+         jmp .flash
+ .hat:
+         lda #$00 : sta TV_KickEnv
+@@ -4854,8 +4870,8 @@
+ SongFiltHi: !byte >MUS_FILT,>Song1Filt,>BerlinAFilt,>BerlinBFilt,>TechnoAFilt,>TechnoBFilt,>TechnoCFilt,>AcidAFilt,>AcidBFilt, >TranceAFilt,>TranceBFilt
+ 
+ ; per-style instrument / mix (A/B pairs identical so 512-row tunes are seamless)
+-StyleBassWaveTbl: !byte $21,$41,$21,$41,$15,$13,$61,$21,$21,$21,$21 ; v2.3 saw/pulse/ring/sync/combined energy arc
+-StyleArpWaveTbl:  !byte $41,$41,$41,$43,$15,$13,$61,$41,$41,$41,$41 ; v2.3 pulse/sync/ring/sync/combined lead colours
++StyleBassWaveTbl: !byte $21,$41,$21,$41,$21,$41,$61,$21,$21,$21,$21 ; v2.4 stable bass: saw/pulse/combined, ring/sync reserved for V2
++StyleArpWaveTbl:  !byte $41,$41,$41,$43,$15,$13,$61,$41,$41,$41,$41 ; v2.4 V2 acid: pulse/sync/ring/sync/combined lead colours
+ StyleSpeedTbl:    !byte 6,4,7,6,5,5,4,3,3,3,3 ; v2.3 breath -> drive -> acid -> peak
+ StyleResTbl:      !byte $c1,$31,$93,$b3,$d3,$e3,$f7,$f1,$f1,$f1,$f1 ; cleaner low sections, harder peak route
+ StyleXposeTbl:    !byte 0,   0,   0,0,     0,0,0,   0,0, 0,0
+@@ -5083,6 +5099,11 @@
+         jsr ClearScreenColor
+         lda #$00
+         sta BKG
++        sta BORDER
++        lda #$08
++        sta VIC_CTRL2           ; normal 40-col text, no accidental multicolor carry-over
++        lda #$1b
++        sta VIC_CTRL1           ; normal visible text mode after FLD/border simulations
+         rts
+ 
+ ExRowPtrs:
+@@ -5098,20 +5119,17 @@
+         rts
+ 
+ ExFillRow:
+-        ; X=row, A=char, ET0=color
+-        pha
++        ; X=row, A=char, ET0=color.  Keep stack balanced.
++        sta ex_tmp
+         jsr ExRowPtrs
+-        pla
+         ldy #39
+ .efr:
++        lda ex_tmp
+         sta (SPTR),y
+         lda ET0
+         sta (CPTR),y
+-        pla
+-        pha
+         dey
+         bpl .efr
+-        pla
+         rts
+ 
+ ExInitSprites:
+@@ -5219,8 +5237,8 @@
+         bne .e0row
+         lda ex_phase
+         and #$07
+-        ora #$10
+-        sta VIC_CTRL2           ; safe visible fine-scroll wobble
++        ora #$08
++        sta VIC_CTRL2           ; safe visible fine-scroll wobble, keep 40-col text
+         rts
+ 
+ ExFldChars: !byte $20,$2e,$2d,$3d,$2b,$2a,$2b,$3d,$2d,$2e,$20,$20,$2e,$3a,$2e,$20
+@@ -5238,71 +5256,38 @@
+         rts
+ 
+ ex1_update:
++        ; Row-bounded ghost-byte field: never touches row 24 or sprite pointers.
+         inc ex_phase
+         lda ex_phase
+         eor frameCounter
+         sta ex_tmp
+-        ldx #0
+-.e1page:
++        lda #0
++        sta ex_row
++.e1row:
++        ldx ex_row
++        jsr ExRowPtrs
++        ldy #39
++.e1col:
+         lda ex_tmp
+-        eor SCREEN,x
++        clc
+         adc frameCounter
++        eor (SPTR),y
++        eor ex_row
+         sta ex_tmp
+-        and #$3f
++        and #$1f
+         ora #$40
+-        sta SCREEN,x
++        sta (SPTR),y
+         lda ex_tmp
+         and #$0f
+         tax
+         lda PAL16,x
+-        ldx ex_col
+-        sta COLOR,x
+-        inc ex_col
+-        ldx ex_col
+-        bne .e1skip
++        sta (CPTR),y
++        dey
++        bpl .e1col
+         inc ex_row
+-.e1skip:
+-        cpx #$ff
+-        bne .e1page_done
+-.e1page_done:
+-        ; four 256-byte stripes, fast enough and intentionally glitchy
+-        ldx #0
+-.e1b:
+-        lda ex_tmp
+-        adc SCREEN+$100,x
+-        eor #$5a
+-        sta ex_tmp
+-        and #$5f
+-        sta SCREEN+$100,x
+-        lda ex_tmp
+-        and #$0f
+-        tay
+-        lda PAL16,y
+-        sta COLOR+$100,x
+-        lda ex_tmp
+-        adc SCREEN+$200,x
+-        eor #$a5
+-        sta ex_tmp
+-        and #$5f
+-        sta SCREEN+$200,x
+-        lda ex_tmp
+-        and #$0f
+-        tay
+-        lda PAL16,y
+-        sta COLOR+$200,x
+-        lda ex_tmp
+-        adc SCREEN+$300,x
+-        eor frameCounter
+-        sta ex_tmp
+-        and #$5f
+-        sta SCREEN+$300,x
+-        lda ex_tmp
+-        and #$0f
+-        tay
+-        lda PAL16,y
+-        sta COLOR+$300,x
+-        inx
+-        bne .e1b
++        lda ex_row
++        cmp #24
++        bne .e1row
+         rts
+ 
+ ; ---------------------------------------------------------------------------
+@@ -5331,6 +5316,7 @@
+         sta ET0
+         lda ex_row
+         asl
++        clc
+         adc ex_phase
+         and #$0f
+         tax
+@@ -5392,6 +5378,7 @@
+         clc
+         adc ex_sprphase
+         and #$7f
++        clc
+         adc #45
+         sta $d001,y
+         lda PAL16,x
+@@ -5403,8 +5390,8 @@
+         inx
+         cpx #8
+         bne .e3spr
+-        lda #$18
+-        sta $d016
++        lda #$08
++        sta $d016               ; restore normal text fine-scroll/multicolor state
+         rts
+ ExSprX: !byte 24,52,80,108,136,164,192,220
+ 
+@@ -5422,7 +5409,7 @@
+         inc ex_phase
+         lda ex_phase
+         and #$07
+-        ora #$10
++        ora #$08
+         sta VIC_CTRL2
+         lda ex_phase
+         and #$07
+@@ -5552,6 +5539,7 @@
+         clc
+         adc ExSprY,x
+         and #$7f
++        clc
+         adc #35
+         sta $d001,y
+         lda PAL16,x

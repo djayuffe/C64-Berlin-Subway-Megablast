@@ -1,0 +1,53 @@
+EXOTIC MEGABLAST v4.2.0 FINAL CLEAN POLISH AUDIT
+
+Changes:
+- Continued clean effect-only presentation.
+- No visible text/cards/scroller; ShowCard and GlobalScroller remain disabled.
+- Transition is now an 18-frame smooth colour-RAM fade.
+- Effect durations expanded and balanced again.
+- Row 23 rail remains removed.
+- Sprite/VIC cleanup improved:
+  - common sprite colours reset.
+  - individual sprite colours $d027..$d02e reset.
+  - low-pulse postframe settles VIC_CTRL2 to normal text state.
+- Music remains expanded 3..10 with first section skipped.
+- No ultrafast tempo: speeds are 6..7 frames per row.
+- PWM/filter motion softened to max 3.
+- Resonance softened further.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ShowCard_disabled": true,
+  "GlobalScroller_disabled": true,
+  "StepFlashFade_alias": true,
+  "CleanFadePal": 16,
+  "cardTimer_18": true,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 3,
+  "StyleFiltStepTbl_max": 3,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "MusSpeedSafe": true,
+  "sprite_common_reset": true,
+  "sprite_color_reset_loop": true,
+  "no_row23_rail": true,
+  "low_pulse_d016_settle": true,
+  "mr_update_in_TransCard": false
+}
+
+labels=390
+errors=0
+warnings=0
+
+RESULT: PASS

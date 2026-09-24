@@ -1,0 +1,48 @@
+EXOTIC MEGABLAST v3.7.0 EXPANDED IMPROVE AUDIT
+
+Changes:
+- Expanded scene timing further while keeping transitions manageable.
+- Expanded music polish:
+  - journey remains 3..10.
+  - first song part remains skipped.
+  - no ultrafast: speeds are still 6..7 frames per row.
+  - speed guard remains active in SelectStyle.
+  - smoother resonance and filter/PWM movement.
+- Expanded U/glow visuals:
+  - large U retained.
+  - inner glow retained.
+  - added top shine.
+  - stronger beat rails on high musicPulse, colour RAM only.
+- Active effect 8 remains calm U glow, not raster-line/raster-wave.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 5,
+  "StyleFiltStepTbl_max": 5,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "MusSpeedSafe": true,
+  "ExDrawBigU": 1,
+  "ExDrawBigUInnerGlow": 1,
+  "ExDrawBigUTopShine": 1,
+  "ExDrawBigU calls": 5,
+  "ExDrawBigUTopShine calls": 1
+}
+
+labels=388
+errors=0
+warnings=0
+
+RESULT: PASS

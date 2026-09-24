@@ -1,0 +1,51 @@
+EXOTIC MEGABLAST v3.6.0 FINAL POLISH AUDIT
+
+Changes:
+- Final music polish:
+  - kept expanded journey 3..10.
+  - first song part is still skipped.
+  - no ultrafast timing: all style speeds are 6..7 frames per row.
+  - speed guard in SelectStyle remains active.
+  - smoother resonance arc.
+  - LP/BP mode-volume arc, avoiding harsh HP-only peak.
+  - calmer PWM and filter LFO.
+  - less smeared arp release.
+- Final visual polish:
+  - effect timings extended slightly.
+  - U glow has large U, inner columns, and bottom shine.
+  - active effect 8 remains calm U glow, not a raster-line effect.
+- Build/package polish:
+  - Makefile output updated to v36.
+  - audit and checksums regenerated.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 5,
+  "StyleFiltStepTbl_max": 5,
+  "StyleVolTbl_count": 11,
+  "StyleResTbl_count": 11,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "MusSpeedSafe": true,
+  "ExDrawBigUInnerGlow": 1,
+  "ExInnerBase": 1,
+  "ExDrawBigU calls": 4
+}
+
+labels=385
+errors=0
+warnings=0
+
+RESULT: PASS

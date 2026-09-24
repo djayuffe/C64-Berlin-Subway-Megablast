@@ -1,0 +1,31 @@
+EXOTIC MEGABLAST v3.3.0 MAGIC-U / SONG-SKIP AUDIT
+
+Changes:
+- Added large beat-lit U overlay to magic bytes / ghost-byte effect.
+- Added same large U overlay to chroma/blend effect.
+- Overlay uses screen + colour RAM only, rows 4..18, so row-24 scroller/sprite pointers are untouched.
+- Removed first song part from runtime journey:
+  - TV_MusInit now starts curSong at section 3.
+  - SelectStyle starts section 3.
+  - song loop wraps 3..10 instead of 2..10.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ExDrawBigU": 1,
+  "ExDrawBigU calls": 2
+}
+
+labels=380
+errors=0
+warnings=0
+
+RESULT: PASS

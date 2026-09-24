@@ -1,0 +1,54 @@
+EXOTIC MEGABLAST v4.5.0 CONTINUED PERFECT CLEAN AUDIT
+
+Changes:
+- Continued perfect clean effect-only presentation.
+- No visible text/cards/scroller; ShowCard and GlobalScroller remain disabled.
+- Transition is now a 28-frame smooth colour-RAM fade.
+- Effect durations expanded into a longer balanced arc.
+- ExKillSprites now also settles BORDER, BKG, VIC_CTRL2 and VIC_CTRL1.
+- ExClear still calls ExKillSprites before clearing.
+- Row 23 rail remains removed.
+- Sprite colour reset loop retained.
+- Music remains expanded 3..10 with first section skipped.
+- No ultrafast tempo: speeds remain 6..7 frames per row.
+- PWM/filter motion remains max 3, with softer early movement.
+- Swing remains max 1.
+- Resonance softened further.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ShowCard_disabled": true,
+  "GlobalScroller_disabled": true,
+  "StepFlashFade_alias": true,
+  "CleanFadePal": 16,
+  "cardTimer_28": true,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 3,
+  "StyleFiltStepTbl_max": 3,
+  "StyleSwingTbl_max": 1,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "MusSpeedSafe": true,
+  "sprite_color_reset_loop": true,
+  "no_row23_rail": true,
+  "ExClear_calls_ExKillSprites": true,
+  "ExKillSprites_vic_settle": true,
+  "mr_update_in_TransCard": false
+}
+
+labels=390
+errors=0
+warnings=0
+
+RESULT: PASS

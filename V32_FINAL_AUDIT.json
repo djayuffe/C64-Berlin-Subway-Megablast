@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "NUM_PARTS": "10",
+    "InitTbl": 10,
+    "UpdateTbl": 10,
+    "PartFramesTbl_Lo": 10,
+    "PartFramesTbl_Hi": 10,
+    "PartBorderTbl": 10,
+    "PartBgTbl": 10,
+    "CardName": 10,
+    "CardSub": 10,
+    "PartStyleTbl": 10,
+    "ExSpriteData": 64,
+    "acme_available": false
+  },
+  "style_counts": {
+    "StyleBassWaveTbl": 11,
+    "StyleArpWaveTbl": 11,
+    "StyleSpeedTbl": 11,
+    "StyleResTbl": 11,
+    "StyleXposeTbl": 11,
+    "StyleVolTbl": 11,
+    "StylePwmBaseTbl": 11,
+    "StylePwmStepTbl": 11,
+    "StyleFiltStepTbl": 11,
+    "StyleBassADTbl": 11,
+    "StyleBassSRTbl": 11,
+    "StyleArpADTbl": 11,
+    "StyleArpSRTbl": 11,
+    "StyleSwingTbl": 11
+  },
+  "song_pointer_counts": {
+    "SongBassLo": 11,
+    "SongBassHi": 11,
+    "SongArp0Lo": 11,
+    "SongArp0Hi": 11,
+    "SongArp1Lo": 11,
+    "SongArp1Hi": 11,
+    "SongArp2Lo": 11,
+    "SongArp2Hi": 11,
+    "SongDrumLo": 11,
+    "SongDrumHi": 11,
+    "SongFiltLo": 11,
+    "SongFiltHi": 11
+  },
+  "music_tables": {
+    "sections": 9,
+    "tables": 54,
+    "all_256": true
+  },
+  "labels": 372,
+  "errors": []
+}

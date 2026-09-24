@@ -1,0 +1,31 @@
+EXOTIC MEGABLAST v3.4.0 NO-RASTER / NO-SUPERFAST-END AUDIT
+
+Changes:
+- Removed active raster-line/raster-wave effect.
+- Replaced effect 8 with calm U glow blend (`ex8_update`) using screen/colour RAM only.
+- Updated cards/scroller from raster wave to U glow.
+- Avoided the superfast final song section:
+  - runtime song loop now wraps 3..9.
+  - first song section remains skipped.
+  - section 10 is no longer reached during normal playback.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ExGlowChars": 16,
+  "ExDrawBigU calls": 3
+}
+
+labels=380
+errors=0
+warnings=0
+
+RESULT: PASS

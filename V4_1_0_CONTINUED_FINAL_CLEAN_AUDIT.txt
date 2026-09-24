@@ -1,0 +1,48 @@
+EXOTIC MEGABLAST v4.1.0 CONTINUED FINAL CLEAN AUDIT
+
+Changes:
+- Continued/finalized clean effect-only presentation.
+- No visible text/cards/scroller; ShowCard and GlobalScroller remain disabled.
+- Transition is now a smoother 16-frame colour-RAM fade.
+- Row 23 colour rail removed to avoid touching the scroller/sprite-pointer edge row.
+- Effect durations expanded and balanced.
+- Music remains expanded 3..10 with first part skipped.
+- No ultrafast tempo: style speeds are 6..7 frames per row.
+- PWM/filter movement remains calm at max 4.
+- Resonance and mode/volume softened further.
+- Sprite/VIC cleanup from v4.0 retained.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ShowCard_disabled": true,
+  "GlobalScroller_disabled": true,
+  "StepFlashFade_alias": true,
+  "CleanFadePal": 16,
+  "cardTimer_16": true,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 4,
+  "StyleFiltStepTbl_max": 4,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "MusSpeedSafe": true,
+  "sprite_common_reset": true,
+  "no_row23_rail": true,
+  "mr_update_in_TransCard": false
+}
+
+labels=390
+errors=0
+warnings=0
+
+RESULT: PASS

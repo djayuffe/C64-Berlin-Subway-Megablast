@@ -1,0 +1,41 @@
+EXOTIC MEGABLAST v3.5.0 EXPANDED AUDIT
+
+Changes:
+- Expanded scene timings across all 10 effects.
+- Expanded music journey to sections 3..10.
+- First song part remains skipped.
+- Former superfast finale is restored only as a slowed/safe finale:
+  - StyleSpeedTbl minimum remains 6 frames per row.
+  - final section speed is 7 frames per row.
+  - SelectStyle speed guard from v3.4.1 remains active.
+- Expanded U glow effect:
+  - calm background blend remains.
+  - large U remains.
+  - added inner U glow columns.
+  - no raster-line/raster-wave effect restored.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "ExDrawBigU calls": 4,
+  "ExDrawBigUInnerGlow": 1
+}
+
+labels=384
+errors=0
+warnings=0
+
+RESULT: PASS

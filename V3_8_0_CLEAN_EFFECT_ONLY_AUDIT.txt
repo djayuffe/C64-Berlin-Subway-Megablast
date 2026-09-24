@@ -1,0 +1,45 @@
+EXOTIC MEGABLAST v3.8.0 CLEAN EFFECT-ONLY AUDIT
+
+Changes:
+- Removed visible text from runtime:
+  - ShowCard returns immediately.
+  - GlobalScroller returns immediately.
+  - title/card strings are blank placeholders.
+  - ScrollMsg is blank.
+- Clean effect-only presentation:
+  - no effect names during transitions.
+  - no scroller row text.
+  - transitions use only a short smooth rain/fade texture.
+- Smoothness:
+  - transition cardTimer reduced to 18 frames.
+  - effect durations balanced longer.
+  - music remains expanded 3..10.
+  - first song part remains skipped.
+  - no ultrafast speeds.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ShowCard_rts": true,
+  "GlobalScroller_rts": true,
+  "visible_scroll_blank": true,
+  "cardTimer_18": true,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false
+}
+
+labels=389
+errors=0
+warnings=0
+
+RESULT: PASS

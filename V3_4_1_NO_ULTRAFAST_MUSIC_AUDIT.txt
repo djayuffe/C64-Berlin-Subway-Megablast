@@ -1,0 +1,39 @@
+EXOTIC MEGABLAST v3.4.1 NO-ULTRAFAST-MUSIC AUDIT
+
+Changes:
+- Hard tempo guard added in SelectStyle:
+  - any style speed below 6 is clamped to 6.
+  - TV_MusTick is reset immediately when style changes, so old fast ticks cannot leak into the next section.
+- StyleSpeedTbl retuned:
+  - minimum speed is now 6 frames per row.
+  - no active section uses 3/4-frame ultra-fast timing.
+- Calmed end-section modulation:
+  - PWM step max reduced.
+  - filter LFO step max reduced.
+  - swing max reduced to 1.
+- Runtime song loop remains 3..9:
+  - first section skipped.
+  - section 10/superfast final section is not reached in normal playback.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 6,
+  "StyleFiltStepTbl_max": 6,
+  "StyleSwingTbl_max": 1,
+  "loop_cmp_10": true,
+  "loop_cmp_11": false,
+  "MusSpeedSafe": true,
+  "TV_MusTick immediate reset": true
+}
+
+labels=381
+errors=0
+warnings=0
+
+RESULT: PASS

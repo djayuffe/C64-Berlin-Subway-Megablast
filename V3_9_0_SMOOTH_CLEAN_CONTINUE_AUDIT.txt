@@ -1,0 +1,38 @@
+EXOTIC MEGABLAST v3.9.0 SMOOTH CLEAN CONTINUE AUDIT
+
+Changes:
+- Continued clean effect-only direction.
+- Removed rain/menu texture from transitions.
+- Transition is now a short colour-RAM fade only.
+- No visible cards, titles, labels, or scroller.
+- GlobalScroller and ShowCard remain disabled.
+- Effect timing expanded/smoothed.
+- Music remains expanded 3..10, first section skipped, no ultrafast tempo.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ShowCard_disabled": true,
+  "GlobalScroller_disabled": true,
+  "CleanFadePal": 16,
+  "cardTimer_10": true,
+  "mr_update_in_TransCard": false,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false
+}
+
+labels=390
+errors=0
+warnings=0
+
+RESULT: PASS

@@ -1,0 +1,5 @@
+build/
+*.d64
+*.d81
+*.log
+.DS_Store

@@ -1,0 +1,56 @@
+EXOTIC MEGABLAST v4.0.0 FINAL CLEAN AUDIT
+
+Changes:
+- Final effect-only polish:
+  - no visible text/cards/scroller.
+  - ShowCard and GlobalScroller are disabled.
+  - blank title/card/scroll data retained only for table compatibility.
+  - transition is a 14-frame smooth colour-RAM fade.
+  - legacy alternate transition aliases to TransCard and cannot draw stale screens.
+- Final flow:
+  - all 10 active effects retained.
+  - effect timings are longer and more even.
+  - sprite/VIC cleanup strengthened.
+  - sprite common colours $d025/$d026 reset on kill.
+  - border settles to black on low pulse.
+- Final music:
+  - expanded journey remains 3..10.
+  - first song part remains skipped.
+  - no ultrafast tempo: style speeds are 6..7 frames per row.
+  - SelectStyle speed guard remains active.
+  - PWM/filter movement calmed to max 4.
+  - smoother resonance/release.
+
+Checks:
+{
+  "NUM_PARTS": 10,
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "ShowCard_disabled": true,
+  "GlobalScroller_disabled": true,
+  "StepFlashFade_alias": true,
+  "CleanFadePal": 16,
+  "cardTimer_14": true,
+  "StyleSpeedTbl_count": 11,
+  "StyleSpeedTbl_min": 6,
+  "StyleSpeedTbl_max": 7,
+  "StylePwmStepTbl_max": 4,
+  "StyleFiltStepTbl_max": 4,
+  "loop_cmp_11": true,
+  "loop_cmp_10": false,
+  "MusSpeedSafe": true,
+  "sprite_common_reset": true,
+  "mr_update_in_TransCard": false
+}
+
+labels=390
+errors=0
+warnings=0
+
+RESULT: PASS

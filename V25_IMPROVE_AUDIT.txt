@@ -1,0 +1,32 @@
+EXOTIC MEGABLAST REMIX v2.5.0 IMPROVE AUDIT
+
+{
+  "InitTbl": 10,
+  "UpdateTbl": 10,
+  "PartFramesTbl_Lo": 10,
+  "PartFramesTbl_Hi": 10,
+  "PartBorderTbl": 10,
+  "PartBgTbl": 10,
+  "CardName": 10,
+  "CardSub": 10,
+  "SpriteData": 64
+}
+style_counts={
+  "StyleBassWaveTbl": 11,
+  "StyleArpWaveTbl": 11,
+  "StyleSpeedTbl": 11,
+  "StyleResTbl": 11,
+  "StyleXposeTbl": 11,
+  "StyleVolTbl": 11,
+  "StylePwmBaseTbl": 11,
+  "StylePwmStepTbl": 11,
+  "StyleFiltStepTbl": 11,
+  "StyleBassADTbl": 11,
+  "StyleBassSRTbl": 11,
+  "StyleArpADTbl": 11,
+  "StyleArpSRTbl": 11
+}
+global_labels=415
+acme=not run - acme unavailable in sandbox
+
+RESULT: PASS

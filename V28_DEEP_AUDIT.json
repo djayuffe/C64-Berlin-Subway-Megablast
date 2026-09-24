@@ -1,0 +1,99 @@
+{
+  "version": "v2.8.0 audited",
+  "checks": {
+    "NUM_PARTS": 10,
+    "InitTbl": 10,
+    "UpdateTbl": 10,
+    "PartBorderTbl": 10,
+    "PartBgTbl": 10,
+    "PartFramesTbl_Lo": 10,
+    "PartFramesTbl_Hi": 10,
+    "PartStyleTbl": 10,
+    "CardName": 10,
+    "CardSub": 10
+  },
+  "style_counts": {
+    "SongBassLo": 11,
+    "SongBassHi": 11,
+    "SongArp0Lo": 11,
+    "SongArp0Hi": 11,
+    "SongArp1Lo": 11,
+    "SongArp1Hi": 11,
+    "SongArp2Lo": 11,
+    "SongArp2Hi": 11,
+    "SongDrumLo": 11,
+    "SongDrumHi": 11,
+    "SongFiltLo": 11,
+    "SongFiltHi": 11,
+    "StyleBassWaveTbl": 11,
+    "StyleArpWaveTbl": 11,
+    "StyleSpeedTbl": 11,
+    "StyleResTbl": 11,
+    "StyleXposeTbl": 11,
+    "StyleVolTbl": 11,
+    "StylePwmBaseTbl": 11,
+    "StylePwmStepTbl": 11,
+    "StyleFiltStepTbl": 11,
+    "StyleBassADTbl": 11,
+    "StyleBassSRTbl": 11,
+    "StyleArpADTbl": 11,
+    "StyleArpSRTbl": 11
+  },
+  "sections": {
+    "BerlinA": {
+      "Bass": 256,
+      "Arp0": 256,
+      "Arp1": 256,
+      "Arp2": 256,
+      "Drum": 256,
+      "Filt": 256
+    },
+    "BerlinB": {
+      "Bass": 256,
+      "Arp0": 256,
+      "Arp1": 256,
+      "Arp2": 256,
+      "Drum": 256,
+      "Filt": 256
+    },
+    "TechnoA": {
+      "Bass": 256,
+      "Arp0": 256,
+      "Arp1": 256,
+      "Arp2": 256,
+      "Drum": 256,
+      "Filt": 256
+    },
+    "TechnoB": {
+      "Bass": 256,
+      "Arp0": 256,
+      "Arp1": 256,
+      "Arp2": 256,
+      "Drum": 256,
+      "Filt": 256
+    },
+    "TechnoC": {
+      "Bass": 256,
+      "Arp0": 256,
+      "Arp1": 256,
+      "Arp2": 256,
+      "Drum": 256,
+      "Filt": 256
+    }
+  },
+  "sprite_len": 64,
+  "labels": 369,
+  "local_labels": 236,
+  "branch_issues": [],
+  "estimated_end": "0xa37f",
+  "acme": "not run - acme not installed in sandbox",
+  "errors": [],
+  "result": "PASS",
+  "fixes": [
+    "Removed unreachable legacy NEW EFFECTS block between active exotic suite and Megablast tables.",
+    "Eliminated inactive duplicate-local-label risk and large stale code/size pressure source.",
+    "ExPostFrame now hides visible row-24 sprite pointer glyphs with black color while sprite effects are active.",
+    "Removed duplicate CLC in ghost-byte update path.",
+    "Updated Makefile/build script to v28 output."
+  ]
+}
