@@ -1,5 +1,8 @@
 # C64 - Berlin Trip Subway Megablast
 
+Copyright © 2026 Ulf Bertilsson. Licensed under the
+[GNU General Public License v3.0 or later](LICENSE).
+
 A Commodore 64 ACME-assembler variant of the Berlin Subway megademo engine,
 centred on the Exotic Megablast effect and its synchronized music sequence.
 

@@ -1,4 +1,6 @@
 ; ============================================================================
+;  Copyright (C) 2026 Ulf Bertilsson
+;  SPDX-License-Identifier: GPL-3.0-or-later
 ;  U83R RUL3Z - MEGADEMO   (C64 / ACME)
 ; ----------------------------------------------------------------------------
 ;  Four effects welded into one sequenced production with a shared 3-voice SID
